@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Invitados;
 use Illuminate\Http\Request;
 use App\Models\Event;
-use App\Models\user;
+use App\Models\User;
 use App\Models\Rol;
 use Illuminate\Support\Facades\Auth;
 
