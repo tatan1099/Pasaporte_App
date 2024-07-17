@@ -248,7 +248,6 @@
     background-color: var(--bs-body-bg);
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    background-image: url(http://127.0.0.1:8000/images/fondoblanco.png);
     background-size: cover;
     background-position: center;
  

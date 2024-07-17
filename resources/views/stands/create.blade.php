@@ -1,233 +1,235 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-8">
-            <div class="createStandEmpresa">
-                <div class="card-body2create">
-          <br>  
-          
-          <div class="containerimgtitle">
-          <img class="logo-createStand d-block" src="{{ asset('images/logoStand.png') }}" alt="">
-          <span class="StandCreate d-inline-block">STAND</span>
-          </div>
-          <div id="success-message-container" class="position-fixed top-0 start-50 translate-middle-x text-center" style="display: none; z-index: 9999;">
-                <div class="alert alert-success" role="alert" style="position: relative;">
-                    <span id="success-message"></span>
-                </div>
+<body style="background-image: url('{{ asset('images/fondoblanco.png') }}');">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="createStandEmpresa">
+                    <div class="card-body2create">
+            <br>  
+            
+            <div class="containerimgtitle">
+            <img class="logo-createStand d-block" src="{{ asset('images/logoStand.png') }}" alt="">
+            <span class="StandCreate d-inline-block">STAND</span>
             </div>
-            @if(session('success'))
-            <script>
-                document.addEventListener('DOMContentLoaded', function () {
-                    showSuccessMessage('{{ session('success') }}');
-                });
-            </script>
-            @endif
-            @if(session('error'))
-            <div id="error-message-container" class="position-fixed top-0 start-50 translate-middle-x text-center" style="display: block; z-index: 9999;">
-                <div class="alert alert-danger" role="alert" style="position: relative;">
-                    <span id="error-message">{{ session('error') }}</span>
-                </div>
-            </div>
-        @endif
-        <br>
-        <br>
-        
-                <form id="stand-form" action="{{ route('stand.store') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                         <div class="inputscrearstand">
-                   <div class="formulario rounded col-md-8 ">
-                    <input type="text" name="name" class="form-controlstand form-control" id="name" required 
-                    placeholder="Nombre Stand" id="name" oninput="this.value = this.value.replace(/^[ ]+|[ ]{2,}/g, '')">
-                   
-                  </div>   
-
-
-                    <!-- por favor no quitar el siguiente label, es muy necesario en el proyecto   -->
-                    <label id="numero-imagenes-label">Número de imágenes</label>    
-                    <!--  este label es muy importante, por favor no quitar  -->
-
-
-                  {{-- Selecciona Evento --}}
-                  <div class="formulario rounded col-md-8 d-flex">
-                    <select id="evento_id" name="evento_id" class="form-controlstand">
-                      <option value="" selected disabled>Selecciona un evento</option>
-                      @foreach($event as $evento)
-                      <option value="{{ $evento->id }}">{{ $evento->name }}</option>
-                      @endforeach
-                    </select>
-                  </div>
-
-                    {{--  Selecciona Lugar --}}
-                  <div class="formulario rounded col-md-8 d-flex">
-                    <select id="place_id" name="place_id" class="form-controlstand ">
-                      <option value="">Selecciona un lugar</option>
-                    </select>
-                  </div>
-
-                    {{-- Selecciona Clasificación --}}
-                  <div class="formulario rounded col-md-8 d-flex">
-                    <select id="classification_id" name="classification_id" class="form-controlstand ">
-                        <option value="" selected disabled>Selecciona una clasificación</option>
-                        @foreach($classifications as $classification)
-                        <option value="{{ $classification->id }}">{{ $classification->name }}</option>
-                        @endforeach
-                    </select>
-                  </div>
-
-                  {{--- URL Logo --}}
-                  <div  class="formulario rounded col-md-8 d-flex-block">
-                    <label for="logo" class="form-labellogobanner label-register">Logo URL</label>
-                    <input type="file" id="logo" class="form-controlstand form-control" name="logo" accept="image/*" required readonly>
-                  </div>
-
-                  {{-- URL Banner --}} 
-                  <div  class="formulario rounded col-md-8 d-flex-block">
-                    <label for="banner" class="form-labellogobanner label-register">Banner URL (tamaño maximo permitido 632x350 pixeles)</label>
-                    <input type="file" class="form-controlstand form-control" id="banner" name="banner" accept="image/*" required>
-                  </div>
-
-                  {{-- Descripción --}}
-                  <div  class="formulario rounded col-md-8 d-flex-block">
-                    <input type="text"  name="description" class="form-controlstand form-control" required placeholder="Descripcion"  id="description"  oninput="this.value = this.value.replace(/^[ ]+|[ ]{2,}/g, '')">
-                  </div>
-
-                  {{-- Facebook --}}
-                  <div class="formulario rounded col-md-8 d-flex-block">
-                      <input type="url"  id="input-stand-facebook"name="facebook" class="form-controlstand form-control" required placeholder="Facebook"
-                            pattern="https:\/\/(www\.)?facebook\.com\/.*"
-                            oninput="this.value = this.value.replace(/^[ ]+|[ ]{2,}/g, '')">
-                  </div>
-                  
-                  {{-- Instagram --}}
-                            <div class="formulario rounded col-md-8 d-flex-block">
-              <input type="url" id="input-stand-instagram"name="instagram" class="form-controlstand form-control" required placeholder="Instagram"
-                    pattern="https:\/\/(www\.)?instagram\.com\/.*"
-                    oninput="this.value = this.value.replace(/^[ ]+|[ ]{2,}/g, '')">
-              </div>
-                  {{-- Tiktok --}}
-                  <div class="formulario rounded col-md-8 d-flex-block">
-                        <input type="url" id="input-stand-tiktok" name="tiktok" class="form-controlstand form-control" required placeholder="Tiktok"
-                              pattern="https:\/\/(www\.)?tiktok\.com\/.*"
-                              oninput="this.value = this.value.replace(/^[ ]+|[ ]{2,}/g, '')">
+            <div id="success-message-container" class="position-fixed top-0 start-50 translate-middle-x text-center" style="display: none; z-index: 9999;">
+                    <div class="alert alert-success" role="alert" style="position: relative;">
+                        <span id="success-message"></span>
                     </div>
-                  {{-- Sitio Web --}}
-                  <div class="formulario rounded col-md-8 d-flex-block">
-                  <input type="url" id="input-stand-web" name="web" class="form-controlstand form-control" required placeholder="Sitio Web"
-                        pattern="https:\/\/.*"
-                        oninput="this.value = this.value.replace(/^[ ]+|[ ]{2,}/g, '')">
-              </div>
+                </div>
+                @if(session('success'))
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        showSuccessMessage('{{ session('success') }}');
+                    });
+                </script>
+                @endif
+                @if(session('error'))
+                <div id="error-message-container" class="position-fixed top-0 start-50 translate-middle-x text-center" style="display: block; z-index: 9999;">
+                    <div class="alert alert-danger" role="alert" style="position: relative;">
+                        <span id="error-message">{{ session('error') }}</span>
+                    </div>
+                </div>
+            @endif
+            <br>
+            <br>
+            
+                    <form id="stand-form" action="{{ route('stand.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                            <div class="inputscrearstand">
+                    <div class="formulario rounded col-md-8 ">
+                        <input type="text" name="name" class="form-controlstand form-control" id="name" required 
+                        placeholder="Nombre Stand" id="name" oninput="this.value = this.value.replace(/^[ ]+|[ ]{2,}/g, '')">
+                    
+                    </div>   
 
-                  {{-- Campos para seleccionar los colores del stand --}}
+
+                        <!-- por favor no quitar el siguiente label, es muy necesario en el proyecto   -->
+                        <label id="numero-imagenes-label">Número de imágenes</label>    
+                        <!--  este label es muy importante, por favor no quitar  -->
+
+
+                    {{-- Selecciona Evento --}}
+                    <div class="formulario rounded col-md-8 d-flex">
+                        <select id="evento_id" name="evento_id" class="form-controlstand">
+                        <option value="" selected disabled>Selecciona un evento</option>
+                        @foreach($event as $evento)
+                        <option value="{{ $evento->id }}">{{ $evento->name }}</option>
+                        @endforeach
+                        </select>
+                    </div>
+
+                        {{--  Selecciona Lugar --}}
+                    <div class="formulario rounded col-md-8 d-flex">
+                        <select id="place_id" name="place_id" class="form-controlstand ">
+                        <option value="">Selecciona un lugar</option>
+                        </select>
+                    </div>
+
+                        {{-- Selecciona Clasificación --}}
+                    <div class="formulario rounded col-md-8 d-flex">
+                        <select id="classification_id" name="classification_id" class="form-controlstand ">
+                            <option value="" selected disabled>Selecciona una clasificación</option>
+                            @foreach($classifications as $classification)
+                            <option value="{{ $classification->id }}">{{ $classification->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    {{--- URL Logo --}}
                     <div  class="formulario rounded col-md-8 d-flex-block">
-                    <i class='PaintRollercreate0 bx bxs-paint-roll  bx-border-circle bx-flip-hsser-circle' style="color:#ffffff" id="PaintRollerfondo"></i>
-                    <label for="color_contenedor_1" class="label_infovistaprevianombrestandcreate0 d-inline">Color de fondo principal</label>
-                    <input type="color" id="color_contenedor_1stand" class="form-controlstand" name="color_contenedor_1" value="#ffffff">
-                  </div>  
+                        <label for="logo" class="form-labellogobanner label-register">Logo URL</label>
+                        <input type="file" id="logo" class="form-controlstand form-control" name="logo" accept="image/*" required readonly>
+                    </div>
 
-                  <div  class="formulario rounded col-md-8 d-flex-block">
-                    <i class='PaintRollercreate02 bx bx-paint bx-border-circle' style="color:#ffffff" id="PaintRollertitulo"></i>
-                    <label for="color_contenedor_2" class="label_infovistaprevianombrestandcreate00 d-inline">Color de letras titulo </label>
-                    <input type="color" id="color_contenedor_2stand" class="form-controlstand" name="color_contenedor_2" value="#ffffff">
-                  </div>
-                  
-                  <div  class="formulario rounded col-md-8 d-flex-block">
-                    <i class='PaintRollercreate03 bx bxs-palette bx-border-circle' style='color:#ffffff' id="PaintRollerencabezado"></i>
-                    <label for="color_contenedor_3" class="label_infovistaprevianombrestandcreate002 d-inline-block ml-2">Color de fondo encabezado</label>
-                    <input type="color" id="color_contenedor_3stand" class="form-controlstand" name="color_contenedor_3" value="#ffffff">
-                  </div>
+                    {{-- URL Banner --}} 
+                    <div  class="formulario rounded col-md-8 d-flex-block">
+                        <label for="banner" class="form-labellogobanner label-register">Banner URL (tamaño maximo permitido 632x350 pixeles)</label>
+                        <input type="file" class="form-controlstand form-control" id="banner" name="banner" accept="image/*" required>
+                    </div>
 
-                  <div  class="formulario rounded col-md-8 d-flex-block">
-                    <i class='Brush bx bx-brush bx-flip-vertical bx-border-circle' style='color:#ffffff' id="Brushcreate"></i>
-                    <label for="color_contenedor_4" class="label_infovistaprevianombrestandcreateul d-inline-block">Color de letras pequeñas</label>
-                    <input type="color" id="color_contenedor_4stand" class="form-controlstand" name="color_contenedor_4" value="#ffffff">
-                  </div>
-                  <div class=" formulario rounded form-labelcrearstand label-register col-md-8 d-flex-block">
-                    <label for="image1" class="label-register">Imagen 1 (tamaño maximo permitido 1004x591 pixeles)</label>
-                    <input type="file" class="form-controlimgstand image-input" id="image1" name="images1" accept="image/*">
-                    <button type="button" class="deletecreate btn delete-image" onclick="deleteImage('image1', 1)">Eliminar</button>
-                </div>
-                </div>
-                <div class="form-labelcrearstand label-register col-md-8 ">
-                    <label for="image2" class="label-register">Imagen 2 (tamaño maximo permitido 1004x591 pixeles)</label>
-                    <input type="file" class="form-controlimgstand image-input" id="image2" name="images2" accept="image/*">
-                    <button type="button" class="deletecreate btn delete-image" onclick="deleteImage('image2', 2)">Eliminar</button>
-                </div>
+                    {{-- Descripción --}}
+                    <div  class="formulario rounded col-md-8 d-flex-block">
+                        <input type="text"  name="description" class="form-controlstand form-control" required placeholder="Descripcion"  id="description"  oninput="this.value = this.value.replace(/^[ ]+|[ ]{2,}/g, '')">
+                    </div>
 
-                <div class="form-labelcrearstand label-register col-md-8">
-                    <label for="image3" class="label-register">Imagen 3 (tamaño maximo permitido 1004x591 pixeles)</label>
-                    <input type="file" class="form-controlimgstand image-input" id="image3" name="images3" accept="image/*">
-                    <button type="button" class="deletecreate btn delete-image" onclick="deleteImage('image3', 3)">Eliminar</button>
+                    {{-- Facebook --}}
+                    <div class="formulario rounded col-md-8 d-flex-block">
+                        <input type="url"  id="input-stand-facebook"name="facebook" class="form-controlstand form-control" required placeholder="Facebook"
+                                pattern="https:\/\/(www\.)?facebook\.com\/.*"
+                                oninput="this.value = this.value.replace(/^[ ]+|[ ]{2,}/g, '')">
+                    </div>
+                    
+                    {{-- Instagram --}}
+                                <div class="formulario rounded col-md-8 d-flex-block">
+                <input type="url" id="input-stand-instagram"name="instagram" class="form-controlstand form-control" required placeholder="Instagram"
+                        pattern="https:\/\/(www\.)?instagram\.com\/.*"
+                        oninput="this.value = this.value.replace(/^[ ]+|[ ]{2,}/g, '')">
                 </div>
-
-                <div class="form-labelcrearstand label-register col-md-8">
-                    <label for="image4" class="label-register">Imagen 4 (tamaño maximo permitido 1004x591 pixeles)</label>
-                    <input type="file" class="form-controlimgstand image-input" id="image4" name="images4" accept="image/*">
-                    <button type="button" class="deletecreate btn delete-image" onclick="deleteImage('image4', 4)">Eliminar</button>
+                    {{-- Tiktok --}}
+                    <div class="formulario rounded col-md-8 d-flex-block">
+                            <input type="url" id="input-stand-tiktok" name="tiktok" class="form-controlstand form-control" required placeholder="Tiktok"
+                                pattern="https:\/\/(www\.)?tiktok\.com\/.*"
+                                oninput="this.value = this.value.replace(/^[ ]+|[ ]{2,}/g, '')">
+                        </div>
+                    {{-- Sitio Web --}}
+                    <div class="formulario rounded col-md-8 d-flex-block">
+                    <input type="url" id="input-stand-web" name="web" class="form-controlstand form-control" required placeholder="Sitio Web"
+                            pattern="https:\/\/.*"
+                            oninput="this.value = this.value.replace(/^[ ]+|[ ]{2,}/g, '')">
                 </div>
 
-                <div class="form-labelcrearstand label-register col-md-8">
-                    <label for="image5" class="label-register">Imagen 5 (tamaño maximo permitido 1004x591 pixeles)</label>
-                    <input type="file" class="form-controlimgstand image-input" id="image5" name="images5" accept="image/*">
-                    <button type="button" class="deletecreate btn delete-image" onclick="deleteImage('image5', 5)">Eliminar</button>
+                    {{-- Campos para seleccionar los colores del stand --}}
+                        <div  class="formulario rounded col-md-8 d-flex-block">
+                        <i class='PaintRollercreate0 bx bxs-paint-roll  bx-border-circle bx-flip-hsser-circle' style="color:#ffffff" id="PaintRollerfondo"></i>
+                        <label for="color_contenedor_1" class="label_infovistaprevianombrestandcreate0 d-inline">Color de fondo principal</label>
+                        <input type="color" id="color_contenedor_1stand" class="form-controlstand" name="color_contenedor_1" value="#ffffff">
+                    </div>  
+
+                    <div  class="formulario rounded col-md-8 d-flex-block">
+                        <i class='PaintRollercreate02 bx bx-paint bx-border-circle' style="color:#ffffff" id="PaintRollertitulo"></i>
+                        <label for="color_contenedor_2" class="label_infovistaprevianombrestandcreate00 d-inline">Color de letras titulo </label>
+                        <input type="color" id="color_contenedor_2stand" class="form-controlstand" name="color_contenedor_2" value="#ffffff">
+                    </div>
+                    
+                    <div  class="formulario rounded col-md-8 d-flex-block">
+                        <i class='PaintRollercreate03 bx bxs-palette bx-border-circle' style='color:#ffffff' id="PaintRollerencabezado"></i>
+                        <label for="color_contenedor_3" class="label_infovistaprevianombrestandcreate002 d-inline-block ml-2">Color de fondo encabezado</label>
+                        <input type="color" id="color_contenedor_3stand" class="form-controlstand" name="color_contenedor_3" value="#ffffff">
+                    </div>
+
+                    <div  class="formulario rounded col-md-8 d-flex-block">
+                        <i class='Brush bx bx-brush bx-flip-vertical bx-border-circle' style='color:#ffffff' id="Brushcreate"></i>
+                        <label for="color_contenedor_4" class="label_infovistaprevianombrestandcreateul d-inline-block">Color de letras pequeñas</label>
+                        <input type="color" id="color_contenedor_4stand" class="form-controlstand" name="color_contenedor_4" value="#ffffff">
+                    </div>
+                    <div class=" formulario rounded form-labelcrearstand label-register col-md-8 d-flex-block">
+                        <label for="image1" class="label-register">Imagen 1 (tamaño maximo permitido 1004x591 pixeles)</label>
+                        <input type="file" class="form-controlimgstand image-input" id="image1" name="images1" accept="image/*">
+                        <button type="button" class="deletecreate btn delete-image" onclick="deleteImage('image1', 1)">Eliminar</button>
+                    </div>
+                    </div>
+                    <div class="form-labelcrearstand label-register col-md-8 ">
+                        <label for="image2" class="label-register">Imagen 2 (tamaño maximo permitido 1004x591 pixeles)</label>
+                        <input type="file" class="form-controlimgstand image-input" id="image2" name="images2" accept="image/*">
+                        <button type="button" class="deletecreate btn delete-image" onclick="deleteImage('image2', 2)">Eliminar</button>
+                    </div>
+
+                    <div class="form-labelcrearstand label-register col-md-8">
+                        <label for="image3" class="label-register">Imagen 3 (tamaño maximo permitido 1004x591 pixeles)</label>
+                        <input type="file" class="form-controlimgstand image-input" id="image3" name="images3" accept="image/*">
+                        <button type="button" class="deletecreate btn delete-image" onclick="deleteImage('image3', 3)">Eliminar</button>
+                    </div>
+
+                    <div class="form-labelcrearstand label-register col-md-8">
+                        <label for="image4" class="label-register">Imagen 4 (tamaño maximo permitido 1004x591 pixeles)</label>
+                        <input type="file" class="form-controlimgstand image-input" id="image4" name="images4" accept="image/*">
+                        <button type="button" class="deletecreate btn delete-image" onclick="deleteImage('image4', 4)">Eliminar</button>
+                    </div>
+
+                    <div class="form-labelcrearstand label-register col-md-8">
+                        <label for="image5" class="label-register">Imagen 5 (tamaño maximo permitido 1004x591 pixeles)</label>
+                        <input type="file" class="form-controlimgstand image-input" id="image5" name="images5" accept="image/*">
+                        <button type="button" class="deletecreate btn delete-image" onclick="deleteImage('image5', 5)">Eliminar</button>
+                    </div>
+
+                    <div class="form-labelcrearstand label-register col-md-8">
+                        <label for="image6" class="label-register">Imagen 6 (tamaño maximo permitido 1004x591 pixeles)</label>
+                        <input type="file" class="form-controlimgstand image-input" id="image6" name="images6" accept="image/*">
+                        <button type="button" class="deletecreate btn delete-image" onclick="deleteImage('image6', 6)">Eliminar</button>
+                    </div>
+
+                    <div class="form-labelcrearstand label-register col-md-8">
+                        <label for="image7" class="label-register">Imagen 7 (tamaño maximo permitido 1004x591 pixeles)</label>
+                        <input type="file" class="form-controlimgstand image-input" id="image7" name="images7" accept="image/*">
+                        <button type="button" class="deletecreate btn delete-image" onclick="deleteImage('image7', 7)">Eliminar</button>
+                    </div>
+
+                    <div class="form-labelcrearstand label-register col-md-8">
+                        <label for="image8" class="label-register">Imagen 8 (tamaño maximo permitido 1004x591 pixeles)</label>
+                        <input type="file" class="form-controlimgstand image-input" id="image8" name="images8" accept="image/*">
+                        <button type="button" class="deletecreate btn delete-image" onclick="deleteImage('image8', 8)">Eliminar</button>
+                    </div>
+
+                    <div class="form-labelcrearstand label-register col-md-8">
+                        <label for="image9" class="label-register">Imagen 9 (tamaño maximo permitido 1004x591 pixeles)</label>
+                        <input type="file" class="form-controlimgstand image-input" id="image9" name="images9" accept="image/*">
+                        <button type="button" class="deletecreate btn delete-image" onclick="deleteImage('image9', 9)">Eliminar</button>
+                    </div>
+
+                    <div class="form-labelcrearstand label-register col-md-8">
+                        <label for="image10" class="label-register">Imagen 10 (tamaño maximo permitido 1004x591 pixeles)</label>
+                        <input type="file" class="form-controlimgstand image-input" id="image10" name="images10" accept="image/*">
+                        <button type="button" class="deletecreate btn delete-image" onclick="deleteImage('image10', 10)">Eliminar</button>
+                    </div>
                 </div>
 
-                <div class="form-labelcrearstand label-register col-md-8">
-                    <label for="image6" class="label-register">Imagen 6 (tamaño maximo permitido 1004x591 pixeles)</label>
-                    <input type="file" class="form-controlimgstand image-input" id="image6" name="images6" accept="image/*">
-                    <button type="button" class="deletecreate btn delete-image" onclick="deleteImage('image6', 6)">Eliminar</button>
+            <!-- Contenedor para las imágenes -->
+                <div class="stand-visualizacionvistapreviastandcreate0" id="vistapreviaevento">
+                    <li class="stands-visualizacionnombrestand align-items-center text-center" id="contenedorpeque">
+                        <label class="label_infovistaprevianombrestand" id="nombrestands">Nombre del Stand</label>
+                    </li>
+                    <label class="label_infovistaprevianombreventocrear" id="informaciondestands">Información del Stand:</label>
+                    <div class="carousel-container d-flex flex-column flex-sm-row align-items-center justify-content-center">
+                        <button type="button" class="prevcreate mb-2 mb-sm-0 me-sm-2" onclick="prevImage2()">&#10094; Anterior</button>
+                        <div id="carouselcrearstand" class="carouselstand mx-3"></div>
+                        <button type="button" class="nextCrearStand" onclick="nextImage2()">Siguiente &#10095;</button>
+                    </div>
                 </div>
 
-                <div class="form-labelcrearstand label-register col-md-8">
-                    <label for="image7" class="label-register">Imagen 7 (tamaño maximo permitido 1004x591 pixeles)</label>
-                    <input type="file" class="form-controlimgstand image-input" id="image7" name="images7" accept="image/*">
-                    <button type="button" class="deletecreate btn delete-image" onclick="deleteImage('image7', 7)">Eliminar</button>
+
+                <div class="button-containerCrear">
+                    <button type="submit" class="btn btn-submit btnEnviarcrearstandindex">Enviar</button>
+                    <a href="{{ route('stand.index') }}" class="btn btnvolverstandindex">Volver</a>
                 </div>
-
-                <div class="form-labelcrearstand label-register col-md-8">
-                    <label for="image8" class="label-register">Imagen 8 (tamaño maximo permitido 1004x591 pixeles)</label>
-                    <input type="file" class="form-controlimgstand image-input" id="image8" name="images8" accept="image/*">
-                    <button type="button" class="deletecreate btn delete-image" onclick="deleteImage('image8', 8)">Eliminar</button>
-                </div>
-
-                <div class="form-labelcrearstand label-register col-md-8">
-                    <label for="image9" class="label-register">Imagen 9 (tamaño maximo permitido 1004x591 pixeles)</label>
-                    <input type="file" class="form-controlimgstand image-input" id="image9" name="images9" accept="image/*">
-                    <button type="button" class="deletecreate btn delete-image" onclick="deleteImage('image9', 9)">Eliminar</button>
-                </div>
-
-                <div class="form-labelcrearstand label-register col-md-8">
-                    <label for="image10" class="label-register">Imagen 10 (tamaño maximo permitido 1004x591 pixeles)</label>
-                    <input type="file" class="form-controlimgstand image-input" id="image10" name="images10" accept="image/*">
-                    <button type="button" class="deletecreate btn delete-image" onclick="deleteImage('image10', 10)">Eliminar</button>
-                </div>
-            </div>
-
-          <!-- Contenedor para las imágenes -->
-            <div class="stand-visualizacionvistapreviastandcreate0" id="vistapreviaevento">
-                <li class="stands-visualizacionnombrestand align-items-center text-center" id="contenedorpeque">
-                    <label class="label_infovistaprevianombrestand" id="nombrestands">Nombre del Stand</label>
-                </li>
-                <label class="label_infovistaprevianombreventocrear" id="informaciondestands">Información del Stand:</label>
-                <div class="carousel-container d-flex flex-column flex-sm-row align-items-center justify-content-center">
-                    <button type="button" class="prevcreate mb-2 mb-sm-0 me-sm-2" onclick="prevImage2()">&#10094; Anterior</button>
-                    <div id="carouselcrearstand" class="carouselstand mx-3"></div>
-                    <button type="button" class="nextCrearStand" onclick="nextImage2()">Siguiente &#10095;</button>
-                </div>
-            </div>
-
-
-            <div class="button-containerCrear">
-                <button type="submit" class="btn btn-submit btnEnviarcrearstandindex">Enviar</button>
-                <a href="{{ route('stand.index') }}" class="btn btnvolverstandindex">Volver</a>
-            </div>
-            </form>
-      </div>
+                </form>
+        </div>
+        </div>
     </div>
-  </div>
-  </div>
-  </div>
+    </div>
+    </div>
+</body>
             
 
 

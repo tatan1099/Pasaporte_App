@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<body style="background-image: url('{{ asset('images/fondoblanco.png') }}');">
     <div class="content">
         <div class="card-body">
             <div class="caja-admin-grafica">
@@ -79,7 +80,7 @@
     </div>
 
     </div>
-
+</body>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

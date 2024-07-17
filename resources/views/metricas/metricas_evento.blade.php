@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container-fluid">
+<body style="background-image: url('{{ asset('images/fondoblanco.png') }}');">
+    <div class="container-fluid ">
         <div class="row justify-content-center col-md-8">
         <div class="caja-admin-metricasEvento">
                 <img class="logo-metricasEvento" src="{{asset('images/Metricas.png')}}" alt="">
@@ -219,7 +220,7 @@
             </div>
         </div>
     </div>
-</div>
+
     <script>
                 document.addEventListener("DOMContentLoaded", function() {
     // Captura el evento de cambio en el combobox de stands
@@ -253,4 +254,6 @@
     </script>
     </div>
 </div>
+</body>
+
 @endsection

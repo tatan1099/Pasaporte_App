@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
-<div class="container-fluid">
+<body style="background-image: url('{{ asset('images/fondoblanco.png') }}');">
+<div class="container-fluid ">
     <div class="row">
         <div class="col-md-8">
         <div class="align-items-center text-center">
@@ -20,7 +21,7 @@
                 </script>
                 @endif
                 
-                    <img class="logo-logo mx-auto" src="{{asset('images/logo.png')}}" alt="">        
+                    <img class="logo-logo mx-auto" src="{{asset('images/Logo.png')}}" alt="">        
                     
                     <span class="grayy-texto cargartextlogo  d-inline">CARGAR</span>
                 
@@ -48,7 +49,7 @@
             </div>
             </div>
         
-    
+</body>
     <script>
         document.getElementById('logo').addEventListener('change', function(event) {
             const file = event.target.files[0];
@@ -76,4 +77,5 @@
         }, 15000);
     }
 </script>
+
 @endsection

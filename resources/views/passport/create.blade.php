@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<body style="background-image: url('{{ asset('images/fondoblanco.png') }}');">
     <div class="container">
         <div class="card">
             <div class="card-header">
@@ -23,4 +24,5 @@
             </div>
         </div>
     </div>
+</body>
 @endsection
