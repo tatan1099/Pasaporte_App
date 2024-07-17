@@ -32,5 +32,12 @@
     </div>
 </div>
 </div>
+<style>
+   .container-fluid {
+        background-image: url("{{ asset('images/fondoblanco.png') }}");
+        background-size: cover; /* Ajusta el tamaño de la imagen al tamaño del contenedor */
+        background-position: center; /* Centra la imagen en el contenedor */
+    }
+</style>
 @endsection
 

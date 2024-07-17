@@ -1,195 +1,197 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="containerediatarevento">
-    <div class="card-empresa">
-        <div class="titleHeaderEditEvent">
-            <img class="logo-evaluationeditarevento d-block" src="{{ asset('images/Crearevento.png') }}" alt="">
-            <h2 class="tittleEvent_2editareven d-inline-block"> Evento</h2>
-        </div>
-        <br>
-        <br>
-        <br>
-        <div class="card-body container-bodyEditEvent">
-         <div id="success-message-container" class="position-fixed top-0 start-50 translate-middle-x text-center" style="display: none; z-index: 9999;">
-                <div class="alert alert-success" role="alert" style="position: relative;">
-                    <span id="success-message"></span>
-                </div>
+<body style="background-image: url('{{ asset('images/fondoblanco.png') }}');">
+    <div class="containerediatarevento">
+        <div class="card-empresa">
+            <div class="titleHeaderEditEvent">
+                <img class="logo-evaluationeditarevento d-block" src="{{ asset('images/Crearevento.png') }}" alt="">
+                <h2 class="tittleEvent_2editareven d-inline-block"> Evento</h2>
             </div>
-            @if(session('success'))
-            <script>
-                document.addEventListener('DOMContentLoaded', function () {
-                    showSuccessMessage('{{ session('success') }}');
-                });
-            </script>
-            @endif
-            @if(session('error'))
-            <div id="error-message-container" class="position-fixed top-0 start-50 translate-middle-x text-center" style="display: block; z-index: 9999;">
-                <div class="alert alert-danger" role="alert" style="position: relative;">
-                    <span id="error-message">{{ session('error') }}</span>
-                </div>
-            </div>
-        @endif
-            <form action="{{ route('UserEvent.update', $evento->id) }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-
-                <!-- Campo para el nombre del evento -->
-                <div class="mb-3create rounded">
-                    <label for="name" class="titlesEditEvent form-label">Nombre del Evento</label>
-                    <input type="text" id="name" name="name" class="form-controleditevent" value="{{ $evento->name }}" required oninput="this.value = this.value.replace(/^[ ]+|[ ]{2,}/g, '')">
-                </div><br>
-
-            <div class="mb-3create rounded">
-            <label class="form-label titlesEditEvent">Logo URL</label>
-            <input type="text" class="form-controleditevent" name="logo" value="{{$evento->logo}}" readonly>
             <br>
-            <button type="button" class="btnNewLogoEditEvent btn " onclick="document.getElementById('new_logo').click()">Cargar Nuevo Logo</button>
-            <input type="file" id="new_logo" name="new_logo" style="display: none">
-        </div><br>
-
-        <div class="mb-3create rounded">
-            <label class="form-label titlesEditEvent">Banner URL</label>
-            <input type="text" class="form-controleditevent" name="banner" value="{{$evento->banner}}" readonly>
             <br>
-
-            <button type="button" class="btnNewBannerEditEvent btn " onclick="document.getElementById('new_banner').click()">Cargar Nuevo Banner</button>
-            <input type="file" id="new_banner" name="new_banner" style="display: none">
-        </div><br>
-
-                <!-- Campo para la descripción -->
-                <div class="mb-3create rounded">
-                    <label for="description" class="form-label titlesEditEvent">Descripción</label>
-                    <textarea id="description" name="description" class="form-controleditevent" style="height: 100px" required oninput="this.value = this.value.replace(/^[ ]+|[ ]{2,}/g, '')">{{ $evento->description }}</textarea>
-                </div><br>
-
-                <!-- Campos para las redes sociales -->
-                <div class="mb-3create rounded">
-                    <label for="facebook" class="form-label titlesEditEvent">Facebook</label>
-                    <input type="url" id="facebook" name="facebook" class="form-controleditevent" value="{{ $evento->facebook }}"
-                        placeholder="https://www.facebook.com/usuario" pattern="https:\/\/(www\.)?facebook\.com\/.*"
-                        oninput="this.value = this.value.replace(/^[ ]+|[ ]{2,}/g, '')">
-                </div><br>
-
-                <div class="mb-3create rounded">
-                    <label for="instagram" class="form-label titlesEditEvent">Instagram</label>
-                    <input type="url" id="instagram" name="instagram" class="form-controleditevent" value="{{ $evento->instagram }}"
-                        placeholder="https://www.instagram.com/usuario" pattern="https:\/\/(www\.)?instagram\.com\/.*"
-                        oninput="this.value = this.value.replace(/^[ ]+|[ ]{2,}/g, '')">
-                </div><br>
-
-                <div class="mb-3create rounded">
-                    <label for="tiktok" class="form-label titlesEditEvent">TikTok</label>
-                    <input type="url" id="tiktok" name="tiktok" class="form-controleditevent" value="{{ $evento->tiktok }}"
-                        placeholder="https://www.tiktok.com/@usuario" pattern="https:\/\/(www\.)?tiktok\.com\/.*"
-                        oninput="this.value = this.value.replace(/^[ ]+|[ ]{2,}/g, '')">
-                </div><br>
-
-                <div class="mb-3create rounded">
-                    <label for="web" class="form-label titlesEditEvent">Página Web</label>
-                    <input type="url" id="web" name="web" class="form-controleditevent" value="{{ $evento->web }}"
-                        placeholder="https://www.paginaweb.com" pattern="https:\/\/.*"
-                        oninput="this.value = this.value.replace(/^[ ]+|[ ]{2,}/g, '')">
-                </div><br>
-
-                <!-- Campos para las fechas -->
-                <div class="mb-3create rounded">
-                    <label for="fechainicio" class="form-label titlesEditEvent">Fecha de Inicio</label>
-                    <input type="date" id="fechainicio" name="fechainicio" class="form-controleditevent" value="{{ $evento->start_date }}">
-                </div><br>
-
-                <div class="mb-3create rounded">
-                    <label for="fechaFin" class="form-label titlesEditEvent">Fecha Fin</label>
-                    <input type="date" id="fechaFin" name="fechaFin" class="form-controleditevent" value="{{ $evento->end_date }}">
-                </div><br>
-                <i class='PaintRollerfondoevenedit bx bxs-paint-roll bx-flip-horizontal bx-border-circle' style="color:#ffffff" ></i>
-                <div class="mb-3create rounded">  
-                  <label for="color_contenedor_1" class="label_fondograndeeveedit">Color de fondo principal</label>
-                  <input type="color" id="input-eventofondogrande" class="form-espacioseventosedite" name="color_contenedor_1" value="{{ $evento->color_contenedor_1 }}">
-                </div>
-
-                  
-                <i class='PaintRollercreateeventoedit bx bx-paint bx-border-circle' style="color:#ffffff" ></i>
-                <div class="mb-3create rounded">
-                  <label for="color_contenedor_2" class="label_letrastituloeventoedit">Color de letras titulo </label>
-                  <input type="color" id="input-eventoletrastit" class="form-espacioseventosedite" name="color_contenedor_2" value="{{ $evento->color_contenedor_2 }}">
-                </div>
-
-                <!-- Campos para los colores -->
-                <i class='PaintRoller_1editevent bx bxs-paint-roll bx-flip-horizontal bx-border-circle' style="color:#ffffff" id="PaintRoller_1"></i>
-                <div class="mb-3create rounded">
-                    <label for="color_contenedor_3" class="form-label titlesEditEvent">Color fondo encabezado</label>
-                    <input type="color" id="color_contenedor_3evento" name="color_contenedor_3" class="form-controlediteventcolor" value="{{ $evento->color_contenedor_3 }}">
-                </div><br>
-                <i class='Paint_1editevent bx bx-paint bx-rotate-270 bx-border-circle' style="color:#ffffff" id="Paint_1"></i>
-                <div class="mb-3create rounded">
-                    <label for="color_contenedor_4" class="form-label titlesEditEvent">Color de letras pequeñas</label>
-                    <input type="color" id="color_contenedor_4evento" name="color_contenedor_4" class="form-controlediteventcolor" value="{{ $evento->color_contenedor_4 }}">
-                <br><br>
-                <!-- Campo para seleccionar la cantidad de imágenes -->
-                <div class="formEvent_1 col-md-8 d-flex-block">
-                      <label for="numero_imagenes" class="label_color form-labelseleccciónimageneseventoe">Selecciona la cantidad de imágenes para los stands</label>
-                      <select name="numero_imagenes" id="numero_imagenes" class="form-controleditevent   form-espacioseventoseditarev" value ="{{$evento->numero_imagenes}}">
-                          @for ($i = 1; $i <= 10; $i++)
-                              <option value="{{ $i }}">{{ $i }}</option>
-                          @endfor
-                      </select><br>
-                </div>
-                  
-                @for($i = 1; $i <= 8; $i++)
-                @php
-                    $imagesField = 'images' . $i;
-                @endphp
-                @if($evento->$imagesField)
-                    <div class="formulario rounded">
-                        <label for="numero_imagenes" class=" form-labelseleccciónimageneseventoediatr">Selecciona las imagenes para el evento </label>
-                        <div class="mb-3-editstanevnt input-group">
-                            
-                            <input type="text" class="form-controleditevento" id="imageUrl{{ $i }}" name="{{ $imagesField }}" value="{{ $evento->$imagesField }}" readonly>
-                            <button type="button" onclick="document.getElementById('new_{{ $imagesField }}').click()" id="btnplfotoedit"> Cargar </button>
-                            <input type="file" id="new_{{ $imagesField }}" name="new_{{ $imagesField }}" style="display: none" onchange="handleImageInputChange(this, {{ $i }})">
-                            <button type="button" class="delete-image" id="btnpelimnuevai" data-index="{{ $i }}">Eliminar</button>
-                        </div>
+            <br>
+            <div class="card-body container-bodyEditEvent">
+            <div id="success-message-container" class="position-fixed top-0 start-50 translate-middle-x text-center" style="display: none; z-index: 9999;">
+                    <div class="alert alert-success" role="alert" style="position: relative;">
+                        <span id="success-message"></span>
                     </div>
+                </div>
+                @if(session('success'))
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        showSuccessMessage('{{ session('success') }}');
+                    });
+                </script>
                 @endif
-            @endfor
-
-            <!-- Contenedor para las imágenes -->
-            <div class="stand-visualizacionvistapreviaevento1" id="vistapreviaevento" style="background-color: {{ $evento->color_contenedor_1 }}">
-                <li class="stands-visualizacionnombreevento text-center" id="contenedorpe" style="background-color: {{ $evento->color_contenedor_3 }}">
-                    <label class="label_colorvistaprevianombrevento" id="nombreevento" style="color: {{ $evento->color_contenedor_2 }};">{{ $evento->name }}</label>
-                </li>
-                <label class="label_infovistaprevianombrevento poscionlabelinfoevento text-center" id="informacióndeleve" style="color: {{ $evento->color_contenedor_4 }}">{{ $evento->description }}</label>
-                <div class="carousel-containerGenerare d-flex flex-column flex-sm-row align-items-center justify-content-center">
-                    <button type="button" class="preveditevent mb-2 mb-sm-0 me-sm-2" onclick="prevImage2()">&#10094;Anterior</button>
-                    <div id="carousel-innerreditar" class="carouselediteven mx-3 mb-3 mb-sm-0">
-                        @for ($i = 1; $i <= 8; $i++)
-                            @if ($evento->{'images'.$i})
-                                <img src="{{ asset($evento->{'images'.$i}) }}" class="carousel-image">
-                            @endif
-                        @endfor
+                @if(session('error'))
+                <div id="error-message-container" class="position-fixed top-0 start-50 translate-middle-x text-center" style="display: block; z-index: 9999;">
+                    <div class="alert alert-danger" role="alert" style="position: relative;">
+                        <span id="error-message">{{ session('error') }}</span>
                     </div>
-                    <button type="button" class="nextGenerareventoEVENTO" onclick="nextImage2()">Siguiente &#10095;</button>
                 </div>
+            @endif
+                <form action="{{ route('UserEvent.update', $evento->id) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+
+                    <!-- Campo para el nombre del evento -->
+                    <div class="mb-3create rounded">
+                        <label for="name" class="titlesEditEvent form-label">Nombre del Evento</label>
+                        <input type="text" id="name" name="name" class="form-controleditevent" value="{{ $evento->name }}" required oninput="this.value = this.value.replace(/^[ ]+|[ ]{2,}/g, '')">
+                    </div><br>
+
+                <div class="mb-3create rounded">
+                <label class="form-label titlesEditEvent">Logo URL</label>
+                <input type="text" class="form-controleditevent" name="logo" value="{{$evento->logo}}" readonly>
+                <br>
+                <button type="button" class="btnNewLogoEditEvent btn " onclick="document.getElementById('new_logo').click()">Cargar Nuevo Logo</button>
+                <input type="file" id="new_logo" name="new_logo" style="display: none">
             </div><br>
 
+            <div class="mb-3create rounded">
+                <label class="form-label titlesEditEvent">Banner URL</label>
+                <input type="text" class="form-controleditevent" name="banner" value="{{$evento->banner}}" readonly>
+                <br>
+
+                <button type="button" class="btnNewBannerEditEvent btn " onclick="document.getElementById('new_banner').click()">Cargar Nuevo Banner</button>
+                <input type="file" id="new_banner" name="new_banner" style="display: none">
+            </div><br>
+
+                    <!-- Campo para la descripción -->
+                    <div class="mb-3create rounded">
+                        <label for="description" class="form-label titlesEditEvent">Descripción</label>
+                        <textarea id="description" name="description" class="form-controleditevent" style="height: 100px" required oninput="this.value = this.value.replace(/^[ ]+|[ ]{2,}/g, '')">{{ $evento->description }}</textarea>
+                    </div><br>
+
+                    <!-- Campos para las redes sociales -->
+                    <div class="mb-3create rounded">
+                        <label for="facebook" class="form-label titlesEditEvent">Facebook</label>
+                        <input type="url" id="facebook" name="facebook" class="form-controleditevent" value="{{ $evento->facebook }}"
+                            placeholder="https://www.facebook.com/usuario" pattern="https:\/\/(www\.)?facebook\.com\/.*"
+                            oninput="this.value = this.value.replace(/^[ ]+|[ ]{2,}/g, '')">
+                    </div><br>
+
+                    <div class="mb-3create rounded">
+                        <label for="instagram" class="form-label titlesEditEvent">Instagram</label>
+                        <input type="url" id="instagram" name="instagram" class="form-controleditevent" value="{{ $evento->instagram }}"
+                            placeholder="https://www.instagram.com/usuario" pattern="https:\/\/(www\.)?instagram\.com\/.*"
+                            oninput="this.value = this.value.replace(/^[ ]+|[ ]{2,}/g, '')">
+                    </div><br>
+
+                    <div class="mb-3create rounded">
+                        <label for="tiktok" class="form-label titlesEditEvent">TikTok</label>
+                        <input type="url" id="tiktok" name="tiktok" class="form-controleditevent" value="{{ $evento->tiktok }}"
+                            placeholder="https://www.tiktok.com/@usuario" pattern="https:\/\/(www\.)?tiktok\.com\/.*"
+                            oninput="this.value = this.value.replace(/^[ ]+|[ ]{2,}/g, '')">
+                    </div><br>
+
+                    <div class="mb-3create rounded">
+                        <label for="web" class="form-label titlesEditEvent">Página Web</label>
+                        <input type="url" id="web" name="web" class="form-controleditevent" value="{{ $evento->web }}"
+                            placeholder="https://www.paginaweb.com" pattern="https:\/\/.*"
+                            oninput="this.value = this.value.replace(/^[ ]+|[ ]{2,}/g, '')">
+                    </div><br>
+
+                    <!-- Campos para las fechas -->
+                    <div class="mb-3create rounded">
+                        <label for="fechainicio" class="form-label titlesEditEvent">Fecha de Inicio</label>
+                        <input type="date" id="fechainicio" name="fechainicio" class="form-controleditevent" value="{{ $evento->start_date }}">
+                    </div><br>
+
+                    <div class="mb-3create rounded">
+                        <label for="fechaFin" class="form-label titlesEditEvent">Fecha Fin</label>
+                        <input type="date" id="fechaFin" name="fechaFin" class="form-controleditevent" value="{{ $evento->end_date }}">
+                    </div><br>
+                    <i class='PaintRollerfondoevenedit bx bxs-paint-roll bx-flip-horizontal bx-border-circle' style="color:#ffffff" ></i>
+                    <div class="mb-3create rounded">  
+                    <label for="color_contenedor_1" class="label_fondograndeeveedit">Color de fondo principal</label>
+                    <input type="color" id="input-eventofondogrande" class="form-espacioseventosedite" name="color_contenedor_1" value="{{ $evento->color_contenedor_1 }}">
+                    </div>
+
+                    
+                    <i class='PaintRollercreateeventoedit bx bx-paint bx-border-circle' style="color:#ffffff" ></i>
+                    <div class="mb-3create rounded">
+                    <label for="color_contenedor_2" class="label_letrastituloeventoedit">Color de letras titulo </label>
+                    <input type="color" id="input-eventoletrastit" class="form-espacioseventosedite" name="color_contenedor_2" value="{{ $evento->color_contenedor_2 }}">
+                    </div>
+
+                    <!-- Campos para los colores -->
+                    <i class='PaintRoller_1editevent bx bxs-paint-roll bx-flip-horizontal bx-border-circle' style="color:#ffffff" id="PaintRoller_1"></i>
+                    <div class="mb-3create rounded">
+                        <label for="color_contenedor_3" class="form-label titlesEditEvent">Color fondo encabezado</label>
+                        <input type="color" id="color_contenedor_3evento" name="color_contenedor_3" class="form-controlediteventcolor" value="{{ $evento->color_contenedor_3 }}">
+                    </div><br>
+                    <i class='Paint_1editevent bx bx-paint bx-rotate-270 bx-border-circle' style="color:#ffffff" id="Paint_1"></i>
+                    <div class="mb-3create rounded">
+                        <label for="color_contenedor_4" class="form-label titlesEditEvent">Color de letras pequeñas</label>
+                        <input type="color" id="color_contenedor_4evento" name="color_contenedor_4" class="form-controlediteventcolor" value="{{ $evento->color_contenedor_4 }}">
+                    <br><br>
+                    <!-- Campo para seleccionar la cantidad de imágenes -->
+                    <div class="formEvent_1 col-md-8 d-flex-block">
+                        <label for="numero_imagenes" class="label_color form-labelseleccciónimageneseventoe">Selecciona la cantidad de imágenes para los stands</label>
+                        <select name="numero_imagenes" id="numero_imagenes" class="form-controleditevent   form-espacioseventoseditarev" value ="{{$evento->numero_imagenes}}">
+                            @for ($i = 1; $i <= 10; $i++)
+                                <option value="{{ $i }}">{{ $i }}</option>
+                            @endfor
+                        </select><br>
+                    </div>
+                    
+                    @for($i = 1; $i <= 8; $i++)
+                    @php
+                        $imagesField = 'images' . $i;
+                    @endphp
+                    @if($evento->$imagesField)
+                        <div class="formulario rounded">
+                            <label for="numero_imagenes" class=" form-labelseleccciónimageneseventoediatr">Selecciona las imagenes para el evento </label>
+                            <div class="mb-3-editstanevnt input-group">
+                                
+                                <input type="text" class="form-controleditevento" id="imageUrl{{ $i }}" name="{{ $imagesField }}" value="{{ $evento->$imagesField }}" readonly>
+                                <button type="button" onclick="document.getElementById('new_{{ $imagesField }}').click()" id="btnplfotoedit"> Cargar </button>
+                                <input type="file" id="new_{{ $imagesField }}" name="new_{{ $imagesField }}" style="display: none" onchange="handleImageInputChange(this, {{ $i }})">
+                                <button type="button" class="delete-image" id="btnpelimnuevai" data-index="{{ $i }}">Eliminar</button>
+                            </div>
+                        </div>
+                    @endif
+                @endfor
+
+                <!-- Contenedor para las imágenes -->
+                <div class="stand-visualizacionvistapreviaevento1" id="vistapreviaevento" style="background-color: {{ $evento->color_contenedor_1 }}">
+                    <li class="stands-visualizacionnombreevento text-center" id="contenedorpe" style="background-color: {{ $evento->color_contenedor_3 }}">
+                        <label class="label_colorvistaprevianombrevento" id="nombreevento" style="color: {{ $evento->color_contenedor_2 }};">{{ $evento->name }}</label>
+                    </li>
+                    <label class="label_infovistaprevianombrevento poscionlabelinfoevento text-center" id="informacióndeleve" style="color: {{ $evento->color_contenedor_4 }}">{{ $evento->description }}</label>
+                    <div class="carousel-containerGenerare d-flex flex-column flex-sm-row align-items-center justify-content-center">
+                        <button type="button" class="preveditevent mb-2 mb-sm-0 me-sm-2" onclick="prevImage2()">&#10094;Anterior</button>
+                        <div id="carousel-innerreditar" class="carouselediteven mx-3 mb-3 mb-sm-0">
+                            @for ($i = 1; $i <= 8; $i++)
+                                @if ($evento->{'images'.$i})
+                                    <img src="{{ asset($evento->{'images'.$i}) }}" class="carousel-image">
+                                @endif
+                            @endfor
+                        </div>
+                        <button type="button" class="nextGenerareventoEVENTO" onclick="nextImage2()">Siguiente &#10095;</button>
+                    </div>
+                </div><br>
 
 
-              <!-- Botones para enviar y volver -->
-              <div class="row text-center">
-                <div class="col">
-                <div class="d-flex flex-column flex-md-row justify-content-center align-items-center pb-3">
-                  <button type="submit" class="btn GuardarEditarevento ">Guardar Cambios</button><br>
-                    <a href="{{ route('UserEvent.listaeventos') }}" class="btn VolverEditarevento">Volver</a>
+
+                <!-- Botones para enviar y volver -->
+                <div class="row text-center">
+                    <div class="col">
+                    <div class="d-flex flex-column flex-md-row justify-content-center align-items-center pb-3">
+                    <button type="submit" class="btn GuardarEditarevento ">Guardar Cambios</button><br>
+                        <a href="{{ route('UserEvent.listaeventos') }}" class="btn VolverEditarevento">Volver</a>
+                    </div>
+                    </div>
                 </div>
-                </div>
-              </div>
 
-            </form>
+                </form>
+            </div>
         </div>
     </div>
-</div>
-</div>
+    </div>
+</body>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         startCarousel();

@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="http://127.0.0.1:8000/css/styles.css">
 </head>
-<body>
+<body style="background-image: url('{{ asset('images/fondoblanco.png') }}');">
     <main class="ticket-system">
         <div class="top">
             <h1 class="title">Scanea el código QR</h1>

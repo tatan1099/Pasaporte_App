@@ -1,64 +1,66 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid">
-<div class="caja-admincalifi">
-    <div class="card-bodyC">
-           
-    <div id="success-message-container" class="position-fixed top-0 start-50 translate-middle-x text-center" style="display: none; z-index: 9999;">
-                <div class="alert alert-success" role="alert" style="position: relative;">
-                    <span id="success-message"></span>
-                </div>
-            </div>
-            @if(session('success'))
-            <script>
-                document.addEventListener('DOMContentLoaded', function () {
-                    showSuccessMessage('{{ session('success') }}');
-                });
-            </script>
-            @endif
-            @if(session('error'))
-            <div id="error-message-container" class="position-fixed top-0 start-50 translate-middle-x text-center" style="display: block; z-index: 9999;">
-                <div class="alert alert-danger" role="alert" style="position: relative;">
-                    <span id="error-message">{{ session('error') }}</span>
-                </div>
-            </div>
-        @endif
-    <h2 class="Calificacionr">Califica</h2>
-        <span class="textoarribarcal">Tu experiencia</span>
-        
-         <form method="POST" action="{{ route('guardar_calificacion') }}">
-            @csrf
-            {{-- Recorremos los criterios y mostramos los campos de calificación y feedback --}}
-            @foreach($criterios as $criterio)
-            <div class="">
-                <div class="ratingcali">
-                    <div class="criterio-rating">
-                        <label>{{ $criterio->name }}:</label>
-                        <div class="rating">
-                            @for ($i = 1; $i <= 5; $i++)
-                            <input type="radio" id="criterio_{{ $criterio->id }}_{{ $i }}" name="criterios[{{ $criterio->id }}][rank]" value="{{ $i }}" class="criterioStar_1">
-                            <label class="star" for="criterio_{{ $criterio->id }}_{{ $i }}"><img src="{{ asset('images/ICON_ESTRELLA_BLANCO.svg') }}" alt="Icono de estrella"></label>
-                            @endfor
-                        </div>
+<body style="background-image: url('{{ asset('images/fondoblanco.png') }}');">
+    <div class="container-fluid">
+    <div class="caja-admincalifi">
+        <div class="card-bodyC">
+            
+        <div id="success-message-container" class="position-fixed top-0 start-50 translate-middle-x text-center" style="display: none; z-index: 9999;">
+                    <div class="alert alert-success" role="alert" style="position: relative;">
+                        <span id="success-message"></span>
                     </div>
                 </div>
-                
-                <button type="button" class="btn feedback-btn" data-target="{{ $criterio->id }}">Comentario</button>
-            </div>
-            <div class="">
-            <textarea class="feedback-textarea" data-target="{{ $criterio->id }}" name="feedback[{{ $criterio->id }}][feedback]" placeholder="Feedback para {{ $criterio->name }}"></textarea>
-            </div>       
-            @endforeach
-              @if($stand)
-                    <input type="hidden" name="standid" value="{{ $stand->id }}">
-                @else
-                    <p>El stand no fue encontrado.</p>
+                @if(session('success'))
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        showSuccessMessage('{{ session('success') }}');
+                    });
+                </script>
                 @endif
-            <button class="btn-enviar" type="submit">Enviar</button>
-        </form>
+                @if(session('error'))
+                <div id="error-message-container" class="position-fixed top-0 start-50 translate-middle-x text-center" style="display: block; z-index: 9999;">
+                    <div class="alert alert-danger" role="alert" style="position: relative;">
+                        <span id="error-message">{{ session('error') }}</span>
+                    </div>
+                </div>
+            @endif
+        <h2 class="Calificacionr">Califica</h2>
+            <span class="textoarribarcal">Tu experiencia</span>
+            
+            <form method="POST" action="{{ route('guardar_calificacion') }}">
+                @csrf
+                {{-- Recorremos los criterios y mostramos los campos de calificación y feedback --}}
+                @foreach($criterios as $criterio)
+                <div class="">
+                    <div class="ratingcali">
+                        <div class="criterio-rating">
+                            <label>{{ $criterio->name }}:</label>
+                            <div class="rating">
+                                @for ($i = 1; $i <= 5; $i++)
+                                <input type="radio" id="criterio_{{ $criterio->id }}_{{ $i }}" name="criterios[{{ $criterio->id }}][rank]" value="{{ $i }}" class="criterioStar_1">
+                                <label class="star" for="criterio_{{ $criterio->id }}_{{ $i }}"><img src="{{ asset('images/ICON_ESTRELLA_BLANCO.svg') }}" alt="Icono de estrella"></label>
+                                @endfor
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="button" class="btn feedback-btn" data-target="{{ $criterio->id }}">Comentario</button>
+                </div>
+                <div class="">
+                <textarea class="feedback-textarea" data-target="{{ $criterio->id }}" name="feedback[{{ $criterio->id }}][feedback]" placeholder="Feedback para {{ $criterio->name }}"></textarea>
+                </div>       
+                @endforeach
+                @if($stand)
+                        <input type="hidden" name="standid" value="{{ $stand->id }}">
+                    @else
+                        <p>El stand no fue encontrado.</p>
+                    @endif
+                <button class="btn-enviar" type="submit">Enviar</button>
+            </form>
+        </div>
     </div>
-</div>
+</body>
 
 
     <style>

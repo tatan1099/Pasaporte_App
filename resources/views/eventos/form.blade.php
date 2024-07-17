@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('content')
-<body>
-<div class="container-fluid">
-        <div class="card-header align-items-center text-center">
+<body style="background-image: url('{{ asset('images/fondoblanco.png') }}');">
+<div class="container-fluid ">
+        <div class="card-header align-items-center text-center ">
         </div>
         <div class="card-body">
         <div class="containerDF">
@@ -148,4 +148,5 @@
         }, 3000);
     }
 </script>
+
 @endsection

@@ -1,48 +1,50 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
+<body style="background-image: url('{{ asset('images/fondoblanco.png') }}');">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
 
-            @php
-                                    $logo = \App\Models\Logo::latest()->first(); // Obtener el último logo creado en la base de datos
-                                    @endphp
-                                  
-                                        @if ($logo)
-                                            <img src="{{ asset($logo->logo) }}" alt="Logo" height="auto" width="auto" style="margin-top:-24vh;">
-                                        @else
-                                            <img src="{{ asset('images/logo1.png') }}" alt="Logo" height="500vh" style="margin-top: 16px;">
-                                        @endif
-                                   
+                @php
+                                        $logo = \App\Models\Logo::latest()->first(); // Obtener el último logo creado en la base de datos
+                                        @endphp
+                                    
+                                            @if ($logo)
+                                                <img src="{{ asset($logo->logo) }}" alt="Logo" height="auto" width="auto" style="margin-top:-24vh;">
+                                            @else
+                                                <img src="{{ asset('images/logo1.png') }}" alt="Logo" height="500vh" style="margin-top: 16px;">
+                                            @endif
+                                    
 
-                <div class="card-body">
-                <div id="success-message-container" class="position-fixed top-0 start-50 translate-middle-x text-center" style="display: none; z-index: 9999;">
-                    <div class="alert alert-success" role="alert" style="position: relative;">
-                        <span id="success-message"></span>
-                    </div>
-                </div>
-
-                @if(session('success'))
-                <script>
-                    document.addEventListener('DOMContentLoaded', function () {
-                        showSuccessMessage('{{ session('success') }}');
-                    });
-                </script>
-                @endif
-                    <!@if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+                    <div class="card-body">
+                    <div id="success-message-container" class="position-fixed top-0 start-50 translate-middle-x text-center" style="display: none; z-index: 9999;">
+                        <div class="alert alert-success" role="alert" style="position: relative;">
+                            <span id="success-message"></span>
                         </div>
-                    @endif
+                    </div>
 
-                    {{ __('You are logged in!') }}
+                    @if(session('success'))
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            showSuccessMessage('{{ session('success') }}');
+                        });
+                    </script>
+                    @endif
+                        <!@if (session('status'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+
+                        {{ __('You are logged in!') }}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</body>
     <script>
     // Función para mostrar el mensaje de éxito
     function showSuccessMessage(message) {

@@ -2,7 +2,7 @@
 
 @section('content')
 
-<body>
+<body style="background-image: url('{{ asset('images/fondoblanco.png') }}');">
     <div class="card-body">
         <div class="caja-admin-graficasSTands">
             <div class="container-titulo">
@@ -547,5 +547,6 @@
         }
     });
 </script>
+
 @endsection
 

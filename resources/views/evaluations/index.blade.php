@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<body style="background-image: url('{{ asset('images/fondoblanco.png') }}');">
     <div class="container">
         <div class="card-evaluation mt-3">
             <img class="logo-evaluation" src="{{asset('images/logoUser.png')}}" alt="">
@@ -30,4 +31,5 @@
         </div>
     
     </div>
+</body>
 @endsection

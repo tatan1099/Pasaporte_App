@@ -2,154 +2,156 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-8 ">
-            <div class="cajacrearevento">
-                <div class="containerimgtitleevento">
-                    <img class="logo-visitadosEvent d-block" src="{{ asset('images/Crearevento.png') }}" alt="">
-                    <span class="tittleEvent_1 d-inline-block">Evento</span>
-                </div>
-                <div id="success-message-container" class="position-fixed top-0 start-50 translate-middle-x text-center" style="display: none; z-index: 9999;">
-                    <div class="alert alert-success" role="alert" style="position: relative;">
-                        <span id="success-message"></span>
+<body style="background-image: url('{{ asset('images/fondoblanco.png') }}');">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 ">
+                <div class="cajacrearevento">
+                    <div class="containerimgtitleevento">
+                        <img class="logo-visitadosEvent d-block" src="{{ asset('images/Crearevento.png') }}" alt="">
+                        <span class="tittleEvent_1 d-inline-block">Evento</span>
                     </div>
-                </div>
-                @if(session('success'))
-                    <script>
-                        document.addEventListener('DOMContentLoaded', function () {
-                            showSuccessMessage('{{ session('success') }}');
-                        });
-                    </script>
-                @endif
-                @if(session('error'))
-                    <div id="error-message-container" class="position-fixed top-0 start-50 translate-middle-x text-center" style="display: block; z-index: 9999;">
-                        <div class="alert alert-danger" role="alert" style="position: relative;">
-                            <span id="error-message">{{ session('error') }}</span>
+                    <div id="success-message-container" class="position-fixed top-0 start-50 translate-middle-x text-center" style="display: none; z-index: 9999;">
+                        <div class="alert alert-success" role="alert" style="position: relative;">
+                            <span id="success-message"></span>
                         </div>
                     </div>
-                @endif
-                <form id="event-form " action="{{ route('UserEvent.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="inputscrearevento">
-                        <!-- Campo para el nombre del evento -->
-                        <div class="formEvent rounded col-md-8 d-flex-block">
-                            <label for="input-evento" class="label_color">Nombre evento</label>
-                            <input type="text" id="input-eventonombre" name="name" class="form-espacioseventos " required autocomplete="off" placeholder="Nombre evento" oninput="this.value = this.value.replace(/^[ ]+|[ ]{2,}/g, '')">
-                        </div>
-                        <!-- Campo para cargar el logo -->
-                        <div class="formEvent rounded col-md-8 d-flex-block ">
-                            <label for="logo" class="label_color form-label">Logo URL</label>
-                            <input type="file" class="form-espacioseventos input-register " name="logo" accept="image/*" required>
-                        </div>
-                        <!-- Campo para cargar el banner -->
-                        <div class="formEvent rounded col-md-8 d-flex-block">
-                            <label for="banner" class="label_color form-label">Banner URL (tamaño máximo 632x350 pixeles)</label>
-                            <input type="file" class="form-espacioseventos input-register" id= "banner" name="banner" accept="image/*" required>
-                        </div>
-                        <!-- Campo para la descripción -->
-                        <div class="formEvent rounded col-md-8 d-flex-block">
-                            <label class="label_color">Información del evento</label>
-                            <textarea class="form-espacioseventos input-evento   " id="input-eventoinformación" placeholder="Descripción" name="description" required></textarea>
-                        </div>
-                        <!-- Campos para las redes sociales -->
-                        <div class="formEvent rounded col-md-8 d-flex-block">
-                            <label for="input-eventofacebook" class="label_color">Facebook</label>
-                            <input type="url" id="input-eventofacebook" class="form-espacioseventos input-evento " name="facebook"
-                            placeholder="Facebook" pattern="https:\/\/(www\.)?facebook\.com\/.*">
-                        </div>
-                        <div class="formEvent rounded col-md-8 d-flex-block">
-                            <label for="input-eventoinstagram" class="label_color">Instagram</label>
-                            <input type="url" id="input-eventoinstagram" class="form-espacioseventos input-evento  " name="instagram"
-                            placeholder="Instagram" pattern="https:\/\/(www\.)?instagram\.com\/.*">
-                        </div>
-                        <div class="formEvent rounded col-md-8 d-flex-block">
-                            <label for="input-eventotiktok" class="label_color">TikTok</label>
-                            <input type="url" id="input-eventotiktok" class="form-espacioseventos input-evento  " name="tiktok"
-                            placeholder="TikTok" pattern="https:\/\/(www\.)?tiktok\.com\/.*">
-                        </div>
-                        <div class="formEvent rounded col-md-8 d-flex-block">
-                            <label for="input-eventopagina" class="label_color">Página web</label>
-                            <input type="url" id="input-eventopagina" class="form-espacioseventos input-evento " name="web"
-                            placeholder="Página web" pattern="https:\/\/.*">
-                        </div>
-                        <div class="formEvent rounded col-md-8 d-flex-block">
-                            <label for="floatingInput" class="label_color">Fecha de Inicio</label>
-                            <input type="date" id="fechainicio" class="form-espacioseventos input-evento " name="fechainicio" min="{{ date('Y-m-d') }}">
-                        </div>
-                        <div class="formEvent rounded col-md-8 d-flex-block">
-                            <label for="fechaFin" class="label_color">Fecha Fin </label>
-                            <input type="date" id="fechaFin" class="form-espacioseventos input-evento   "  name="fechaFin" min="{{ date('Y-m-d', strtotime('+1 day')) }}">
-                        </div>
-                        <hr>
-                        <!-- Campo para seleccionar el primer color del stand -->
-                        <i class='PaintRollerfondoeven bx bxs-paint-roll bx-flip-horizontal bx-border-circle' style="color:#ffffff" ></i>
-                        <div class="formEvent rounded col-md-8 d-flex-block">  
-                            <label for="color_contenedor_1" class="label_fondograndeeve">Color de fondo principal</label>
-                            <input type="color" id="input-eventofondogrande" class="form-espacioseventos " name="color_contenedor_1" value="#ffffff">
-                        </div>
-                        <i class='PaintRollercreateevento1 bx bx-paint bx-border-circle' style="color:#ffffff" ></i>
-                        <div class="formEvent rounded col-md-8 d-flex-block">
-                            <label for="color_contenedor_2" class="label_letrastituloevento">Color de letras titulo </label>
-                            <input type="color" id="input-eventoletrastit" class="form-espacioseventos " name="color_contenedor_2" value="#ffffff">
-                        </div>
-                        <i class='PaintRoller_1 bx bxs-paint-roll bx-flip-horizontal bx-border-circle' style="color:#ffffff" id="PaintRoller_1"></i>
-                        <div class="formEvent rounded col-md-8 d-flex-block">
-                            <label for="color_contenedor_3" class="form-labelcolores label-colores1 label-register">Color de fondo encabezado</label>
-                            <input type="color" id="input-eventoencabezado" class="form-espacioseventos input-register separacionentrelabels   " name="color_contenedor_3" value="#000000">
-                        </div>
-                        <!-- Campo para seleccionar el segundo color del stand -->
-                        <i class='Paint_1 bx bx-paint bx-rotate-270 bx-border-circle' style="color:#ffffff" id="Paint_1"></i>
-                        <div class="formEvent rounded col-md-8 d-flex-block">
-                            <label for="color_contenedor_4" class="form-labelcolores label-colores1 label-register  ">Color de letras pequeñas</label>
-                            <input type="color" id="input-eventoletraspequeñas" class="form-espacioseventos input-register    " name="color_contenedor_4" value="#ffffff">
-                        </div>
-                        <!-- Contenedor del segundo carrusel -->
-                        <div class="formEvent_1 col-md-8 d-flex-block">
-                            <label for="numero_imagenes" class="label_color posicionlabel">Selecciona la cantidad de imágenes para los stands</label>
-                            <select name="numero_imagenes" id="numero_imagenes" class="form-controlnumeroimagenes input-register form-espacioseventos00 ">
-                                @for ($i = 1; $i <= 10; $i++)
-                                    <option value="{{ $i }}">{{ $i }}</option>
-                                @endfor
-                            </select>
-                        </div>
-                        <label for="numero_imagenes" class="label_color form-labelseleccciónimagenesevento">Selecciona las imagenes para el evento (tamaño máximo  1004x591 pixeles) </label>
-                        @for ($i = 1; $i <= 8; $i++)
-                            <div class="formEvent_1 col-md-8 d-flex-block" id="image{{ $i }}">
-                                <label for="images{{ $i }}" class="label_color"></label>
-                                <input type="file" class="form-controlimegenesdelevento input-register image-input " id="images{{ $i }}" name="images{{ $i }}" accept="image/*" placeholder="Limite de tamaño 1004x591 pixeles">
-                                <!-- <button type="button" class="btnElim btn  delete-image" id="btnElim">Eliminar</button> -->
-                                <button type="button" class="btnElim btn delete-image" data-index="{{ $i }}">Eliminar</button>
+                    @if(session('success'))
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function () {
+                                showSuccessMessage('{{ session('success') }}');
+                            });
+                        </script>
+                    @endif
+                    @if(session('error'))
+                        <div id="error-message-container" class="position-fixed top-0 start-50 translate-middle-x text-center" style="display: block; z-index: 9999;">
+                            <div class="alert alert-danger" role="alert" style="position: relative;">
+                                <span id="error-message">{{ session('error') }}</span>
                             </div>
-                        @endfor
-                    </div>
-                    <div class="stand-visualizacionvistapreviaevento" id="vistapreviaevento">
-                        <li class="stands-visualizacionnombre   align-items-center text-center" id="contenedorpe">
-                            <label  class="label_colorvistaprevianombrevento" id="nombreevento">Nombre del evento</label>
-                        </li>
-                        <label class="label_infovistaprevianombrevento" id="informacióndeleve">Información del evento:</label>
-                        <div class="carousel-containerGenerare d-flex align-items-center">
+                        </div>
+                    @endif
+                    <form id="event-form " action="{{ route('UserEvent.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="inputscrearevento">
+                            <!-- Campo para el nombre del evento -->
+                            <div class="formEvent rounded col-md-8 d-flex-block">
+                                <label for="input-evento" class="label_color">Nombre evento</label>
+                                <input type="text" id="input-eventonombre" name="name" class="form-espacioseventos " required autocomplete="off" placeholder="Nombre evento" oninput="this.value = this.value.replace(/^[ ]+|[ ]{2,}/g, '')">
+                            </div>
+                            <!-- Campo para cargar el logo -->
+                            <div class="formEvent rounded col-md-8 d-flex-block ">
+                                <label for="logo" class="label_color form-label">Logo URL</label>
+                                <input type="file" class="form-espacioseventos input-register " name="logo" accept="image/*" required>
+                            </div>
+                            <!-- Campo para cargar el banner -->
+                            <div class="formEvent rounded col-md-8 d-flex-block">
+                                <label for="banner" class="label_color form-label">Banner URL (tamaño máximo 632x350 pixeles)</label>
+                                <input type="file" class="form-espacioseventos input-register" id= "banner" name="banner" accept="image/*" required>
+                            </div>
+                            <!-- Campo para la descripción -->
+                            <div class="formEvent rounded col-md-8 d-flex-block">
+                                <label class="label_color">Información del evento</label>
+                                <textarea class="form-espacioseventos input-evento   " id="input-eventoinformación" placeholder="Descripción" name="description" required></textarea>
+                            </div>
+                            <!-- Campos para las redes sociales -->
+                            <div class="formEvent rounded col-md-8 d-flex-block">
+                                <label for="input-eventofacebook" class="label_color">Facebook</label>
+                                <input type="url" id="input-eventofacebook" class="form-espacioseventos input-evento " name="facebook"
+                                placeholder="Facebook" pattern="https:\/\/(www\.)?facebook\.com\/.*">
+                            </div>
+                            <div class="formEvent rounded col-md-8 d-flex-block">
+                                <label for="input-eventoinstagram" class="label_color">Instagram</label>
+                                <input type="url" id="input-eventoinstagram" class="form-espacioseventos input-evento  " name="instagram"
+                                placeholder="Instagram" pattern="https:\/\/(www\.)?instagram\.com\/.*">
+                            </div>
+                            <div class="formEvent rounded col-md-8 d-flex-block">
+                                <label for="input-eventotiktok" class="label_color">TikTok</label>
+                                <input type="url" id="input-eventotiktok" class="form-espacioseventos input-evento  " name="tiktok"
+                                placeholder="TikTok" pattern="https:\/\/(www\.)?tiktok\.com\/.*">
+                            </div>
+                            <div class="formEvent rounded col-md-8 d-flex-block">
+                                <label for="input-eventopagina" class="label_color">Página web</label>
+                                <input type="url" id="input-eventopagina" class="form-espacioseventos input-evento " name="web"
+                                placeholder="Página web" pattern="https:\/\/.*">
+                            </div>
+                            <div class="formEvent rounded col-md-8 d-flex-block">
+                                <label for="floatingInput" class="label_color">Fecha de Inicio</label>
+                                <input type="date" id="fechainicio" class="form-espacioseventos input-evento " name="fechainicio" min="{{ date('Y-m-d') }}">
+                            </div>
+                            <div class="formEvent rounded col-md-8 d-flex-block">
+                                <label for="fechaFin" class="label_color">Fecha Fin </label>
+                                <input type="date" id="fechaFin" class="form-espacioseventos input-evento   "  name="fechaFin" min="{{ date('Y-m-d', strtotime('+1 day')) }}">
+                            </div>
+                            <hr>
+                            <!-- Campo para seleccionar el primer color del stand -->
+                            <i class='PaintRollerfondoeven bx bxs-paint-roll bx-flip-horizontal bx-border-circle' style="color:#ffffff" ></i>
+                            <div class="formEvent rounded col-md-8 d-flex-block">  
+                                <label for="color_contenedor_1" class="label_fondograndeeve">Color de fondo principal</label>
+                                <input type="color" id="input-eventofondogrande" class="form-espacioseventos " name="color_contenedor_1" value="#ffffff">
+                            </div>
+                            <i class='PaintRollercreateevento1 bx bx-paint bx-border-circle' style="color:#ffffff" ></i>
+                            <div class="formEvent rounded col-md-8 d-flex-block">
+                                <label for="color_contenedor_2" class="label_letrastituloevento">Color de letras titulo </label>
+                                <input type="color" id="input-eventoletrastit" class="form-espacioseventos " name="color_contenedor_2" value="#ffffff">
+                            </div>
+                            <i class='PaintRoller_1 bx bxs-paint-roll bx-flip-horizontal bx-border-circle' style="color:#ffffff" id="PaintRoller_1"></i>
+                            <div class="formEvent rounded col-md-8 d-flex-block">
+                                <label for="color_contenedor_3" class="form-labelcolores label-colores1 label-register">Color de fondo encabezado</label>
+                                <input type="color" id="input-eventoencabezado" class="form-espacioseventos input-register separacionentrelabels   " name="color_contenedor_3" value="#000000">
+                            </div>
+                            <!-- Campo para seleccionar el segundo color del stand -->
+                            <i class='Paint_1 bx bx-paint bx-rotate-270 bx-border-circle' style="color:#ffffff" id="Paint_1"></i>
+                            <div class="formEvent rounded col-md-8 d-flex-block">
+                                <label for="color_contenedor_4" class="form-labelcolores label-colores1 label-register  ">Color de letras pequeñas</label>
+                                <input type="color" id="input-eventoletraspequeñas" class="form-espacioseventos input-register    " name="color_contenedor_4" value="#ffffff">
+                            </div>
+                            <!-- Contenedor del segundo carrusel -->
+                            <div class="formEvent_1 col-md-8 d-flex-block">
+                                <label for="numero_imagenes" class="label_color posicionlabel">Selecciona la cantidad de imágenes para los stands</label>
+                                <select name="numero_imagenes" id="numero_imagenes" class="form-controlnumeroimagenes input-register form-espacioseventos00 ">
+                                    @for ($i = 1; $i <= 10; $i++)
+                                        <option value="{{ $i }}">{{ $i }}</option>
+                                    @endfor
+                                </select>
+                            </div>
+                            <label for="numero_imagenes" class="label_color form-labelseleccciónimagenesevento">Selecciona las imagenes para el evento (tamaño máximo  1004x591 pixeles) </label>
+                            @for ($i = 1; $i <= 8; $i++)
+                                <div class="formEvent_1 col-md-8 d-flex-block" id="image{{ $i }}">
+                                    <label for="images{{ $i }}" class="label_color"></label>
+                                    <input type="file" class="form-controlimegenesdelevento input-register image-input " id="images{{ $i }}" name="images{{ $i }}" accept="image/*" placeholder="Limite de tamaño 1004x591 pixeles">
+                                    <!-- <button type="button" class="btnElim btn  delete-image" id="btnElim">Eliminar</button> -->
+                                    <button type="button" class="btnElim btn delete-image" data-index="{{ $i }}">Eliminar</button>
+                                </div>
+                            @endfor
+                        </div>
+                        <div class="stand-visualizacionvistapreviaevento" id="vistapreviaevento">
+                            <li class="stands-visualizacionnombre   align-items-center text-center" id="contenedorpe">
+                                <label  class="label_colorvistaprevianombrevento" id="nombreevento">Nombre del evento</label>
+                            </li>
+                            <label class="label_infovistaprevianombrevento" id="informacióndeleve">Información del evento:</label>
+                            <div class="carousel-containerGenerare d-flex align-items-center">
+                                
+                                <!-- Botón de anterior del segundo carrusel -->
+                                <button type="button" class="prevcrearevento" onclick="prevImage2()">&#10094; Anterior</button>
+                                <div id="carousel-inerE" class="carouseleventocrear mx-3"></div>
+                                <!-- Botón de siguiente del segundo carrusel -->
+                                <button type="button" class="nextGenerareventoEVENTO" onclick="nextImage2()">Siguiente &#10095;</button>
                             
-                            <!-- Botón de anterior del segundo carrusel -->
-                            <button type="button" class="prevcrearevento" onclick="prevImage2()">&#10094; Anterior</button>
-                            <div id="carousel-inerE" class="carouseleventocrear mx-3"></div>
-                            <!-- Botón de siguiente del segundo carrusel -->
-                            <button type="button" class="nextGenerareventoEVENTO" onclick="nextImage2()">Siguiente &#10095;</button>
-                           
+                            </div>
                         </div>
-                    </div>
-                     <!-- Botones para enviar y volver -->
-                    <div class="row">
-                        <div class="col text-center">
-                            <button type="submit" id="btnEnviarcrearevento" class="btnEnviarcrearevento btn  btn-submit">Enviar</button>
-                            <a href="{{ route('UserEvent.listaeventos') }}" id ="btnVolvercrearevento" class=" btn  " id="btnVolver">Volver</a>
+                        <!-- Botones para enviar y volver -->
+                        <div class="row">
+                            <div class="col text-center">
+                                <button type="submit" id="btnEnviarcrearevento" class="btnEnviarcrearevento btn  btn-submit">Enviar</button>
+                                <a href="{{ route('UserEvent.listaeventos') }}" id ="btnVolvercrearevento" class=" btn  " id="btnVolver">Volver</a>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</body>
 <script>
         document.addEventListener('DOMContentLoaded', (event) => {
             const defaultUrls = {

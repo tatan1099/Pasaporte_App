@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<body>
+<body style="background-image: url('{{ asset('images/fondoblanco.png') }}');">
 
 
     <!-- Mensaje de éxito -->

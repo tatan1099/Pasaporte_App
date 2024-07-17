@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-
+<body style="background-image: url('{{ asset('images/fondoblanco.png') }}');">
     <div class=" container-fluid containereventosdeladministradordelevento ">
         <div class="card-header align-items-center text-center"></div>
             <div class="card-body">
@@ -74,6 +74,7 @@
             </div>   
         </div>
     </div> 
+</body>
 <script>
     // Función para mostrar el mensaje de éxito
     function showSuccessMessage(message) {

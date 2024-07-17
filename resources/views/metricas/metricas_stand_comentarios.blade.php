@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<body style="background-image: url('{{ asset('images/fondoblanco.png') }}');">
     <div class="container-fluid">
         <div class="col-md-8">
             <div class="row">
@@ -51,6 +52,7 @@
     </div>
 </div>
 </div>
+</body>
     <style>
     /* Estilo para estrella rellena */ 
 .star-filled {
