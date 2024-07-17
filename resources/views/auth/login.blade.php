@@ -78,7 +78,7 @@
                                         <img src="{{ asset('images/google.png') }}" alt="" class="img-fluid" style="width: 77px; height: 92px;">
                                     </a>
                                     <a href="{{ route('login-facebook') }}">
-                                        <img src="{{ asset('images/facebookk.png') }}" alt="" class="img-fluid" style="width: 46px; height: 46px;">
+                                        <img src="{{ asset('images/facebook.png') }}" alt="" class="img-fluid" style="width: 46px; height: 46px;">
                                     </a>
                                 </div>
                             </div>
