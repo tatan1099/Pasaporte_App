@@ -47,13 +47,13 @@
                                 <input type="email" name="Correo" id="Correo" class="form-control" required placeholder="E-mail">
                             </div>
                             <div class="form-groupinviia">      
-                                <input type="tel" name="Telefono" id="Telefono" class="form-control" required placeholder="Número de teléfono" pattern="\d*" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                                <input type="tel" name="Telefono" id="Telefono" class="form-control"required minlength="6" maxlength="10" placeholder="Número de Celular" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                             </div>    
                                 <div class="form-group text-center">
                                 <div class="d-grid">
                                 <button type="submit" value="Enviar" class="btn btn-primary botonEnviarInvitados">Enviar</button>
                             </div>
-                                
+                              
                             </form>
                         </div>
                     </div>
