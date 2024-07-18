@@ -34,6 +34,7 @@
             @endif
             <br>
             <br>
+            <!-- cambio -->
             
                     <form id="stand-form" action="{{ route('stand.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
