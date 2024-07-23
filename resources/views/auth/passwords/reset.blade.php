@@ -4,7 +4,7 @@
 <body style="background-image: url('{{ asset('images/fondoblanco.png') }}');">
     <div class="container-fluid">
     <div class="caja-adminplaceditCREATErest mt-2">  
-        <div class="card-empresa">
+        <div class="card-empresa Card-reset-password">
         <div id="success-message-container" class="position-fixed top-0 start-50 translate-middle-x text-center" style="display: none; z-index: 9999;">
                     <div class="alert alert-success" role="alert" style="position: relative;">
                         <span id="success-message"></span>
@@ -32,7 +32,7 @@
                             <div class="registroplaceuserdsAB d-md-inline">
                                 <label for="email" class="col-form-label text-md-end labelresetcontraseña">{{ __('Correo electronico') }}</label>
                             </div>
-                                <div class="mb-3 rounded formplaceregis">
+                                <div class="mb-3 rounded formplaceregis form-resettpassword">
                                     <input id="email" type="email" class="form-control position @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
 
                                     @error('email')
