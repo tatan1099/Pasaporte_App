@@ -4,6 +4,7 @@
 <body style="background-image: url('{{ asset('images/fondoblanco.png') }}');">
     <div class="container-fluid">
     <div class="caja-adminplaceditCREATErest mt-2">  
+        <!-- cambio -->
         <div class="card-empresa Card-reset-password">
         <div id="success-message-container" class="position-fixed top-0 start-50 translate-middle-x text-center" style="display: none; z-index: 9999;">
                     <div class="alert alert-success" role="alert" style="position: relative;">
